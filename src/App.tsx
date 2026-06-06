@@ -87,7 +87,7 @@ const App = () => {
   };
 
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center overflow-auto">
+    <div className="flex h-full w-full flex-col items-center justify-center overflow-auto p-2 lg:p-4 xl:p-10">
       <Card className="w-full max-w-3xl">
         <CardHeader>
           <div className="flex items-center justify-between">
