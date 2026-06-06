@@ -1,3 +1,5 @@
+import { gooeyToast } from "goey-toast";
+
 import {
   Dropzone,
   DropzoneContent,
@@ -24,7 +26,12 @@ const AudioUploader = ({
       maxSize={1024 * 1024 * 20}
       minSize={1024}
       onDrop={(files) => onFileSelect(files[0])}
-      onError={console.error}
+      onError={(error) => {
+        gooeyToast.error("Failed to upload audio", {
+          description: error.message,
+        });
+        console.error(error);
+      }}
       disabled={disabled}
     >
       <DropzoneEmptyState />

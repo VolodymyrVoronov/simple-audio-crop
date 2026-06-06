@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { gooeyToast } from "goey-toast";
 
 import { useFFmpeg } from "./hooks/useFFmpeg";
 import type { OutputFormat } from "./types";
@@ -53,11 +54,13 @@ const App = () => {
 
   const handleCrop = async () => {
     if (!audioFile) {
+      gooeyToast.error("Please upload an audio file.");
       alert("Please upload an audio file.");
       return;
     }
 
     if (!loaded) {
+      gooeyToast.error("FFmpeg is still loading. Please wait a few seconds.");
       alert("FFmpeg is still loading. Please wait a few seconds.");
       return;
     }
@@ -77,8 +80,8 @@ const App = () => {
       setDownloadUrl(result.downloadUrl);
       setDownloadFileName(result.fileName);
     } catch (error) {
+      gooeyToast.error("Failed to crop audio.");
       console.error(error);
-
       alert("Failed to crop audio. Check the browser console for details.");
     }
   };
@@ -133,6 +136,7 @@ const App = () => {
             <DownloadButton
               downloadUrl={downloadUrl}
               fileName={downloadFileName || `cropped.${outputFormat}`}
+              fileSize={audioFile?.size}
             />
           </CardFooter>
         )}

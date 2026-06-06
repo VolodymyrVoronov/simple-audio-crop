@@ -1,3 +1,5 @@
+import { ScissorsLineDashedIcon } from "lucide-react";
+
 import { formatTime } from "@/helpers";
 import type { OutputFormat } from "@/types";
 
@@ -42,8 +44,10 @@ const CropControls = ({
       <h3>Crop Settings</h3>
 
       <div className="grid gap-2 grid-cols-2 lg:grid-cols-4 items-center">
-        <div className="flex gap-2">
-          <Label htmlFor="format">Output Format</Label>
+        <div className="flex gap-2 items-center">
+          <Label htmlFor="format" className="font-semibold">
+            Output Format
+          </Label>
 
           <Select value={outputFormat} onValueChange={handleFormatChange}>
             <SelectTrigger id="format">
@@ -73,7 +77,13 @@ const CropControls = ({
         </div>
       </div>
 
-      <Button onClick={onCrop} disabled={isCropping || selectedLength <= 0}>
+      <Button
+        onClick={onCrop}
+        disabled={isCropping || selectedLength <= 0}
+        variant="outline"
+        className="border-primary dark:border-primary border-dashed shadow-none"
+      >
+        <ScissorsLineDashedIcon />
         {isCropping ? "Cropping..." : "Crop Audio"}
       </Button>
     </div>

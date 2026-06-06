@@ -1,5 +1,6 @@
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { fetchFile } from "@ffmpeg/util";
+import { gooeyToast } from "goey-toast";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import type { OutputFormat } from "@/types";
@@ -21,6 +22,7 @@ export const useFFmpeg = () => {
         await ffmpeg.load();
         setLoaded(true);
       } catch (error) {
+        gooeyToast.error("Failed to load FFmpeg");
         console.error("Failed to load FFmpeg:", error);
         loadingRef.current = false;
       }
@@ -73,6 +75,7 @@ export const useFFmpeg = () => {
       format: OutputFormat,
     ) => {
       if (!loaded) {
+        gooeyToast.error("FFmpeg is not loaded yet");
         throw new Error("FFmpeg is not loaded yet");
       }
 
