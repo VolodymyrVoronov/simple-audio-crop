@@ -6,11 +6,16 @@ import {
 
 export interface IAudioUploaderProps {
   file?: File;
+  disabled?: boolean;
 
   onFileSelect: (file: File) => void;
 }
 
-const AudioUploader = ({ file, onFileSelect }: IAudioUploaderProps) => {
+const AudioUploader = ({
+  file,
+  disabled,
+  onFileSelect,
+}: IAudioUploaderProps) => {
   return (
     <Dropzone
       src={file ? [file] : []}
@@ -20,6 +25,7 @@ const AudioUploader = ({ file, onFileSelect }: IAudioUploaderProps) => {
       minSize={1024}
       onDrop={(files) => onFileSelect(files[0])}
       onError={console.error}
+      disabled={disabled}
     >
       <DropzoneEmptyState />
       <DropzoneContent />

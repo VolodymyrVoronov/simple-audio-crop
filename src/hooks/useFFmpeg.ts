@@ -80,8 +80,7 @@ export const useFFmpeg = () => {
 
       try {
         const inputName = `input.${file.name.split(".").pop()}`;
-
-        const outputName = `output.${format}`;
+        const outputName = `${file.name.split(".")[0]}-[cropped].${format}`;
 
         await ffmpeg.writeFile(inputName, await fetchFile(file));
 

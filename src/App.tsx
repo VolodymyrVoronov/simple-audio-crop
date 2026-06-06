@@ -15,6 +15,7 @@ import AudioUploader from "./components/AudioUploader";
 import CropControls from "./components/CropControls";
 import DownloadButton from "./components/DownloadButton";
 import WaveformEditor from "./components/WaveformEditor";
+import { Badge } from "@/components/ui/badge";
 
 const App = () => {
   const [audioFile, setAudioFile] = useState<File>();
@@ -83,7 +84,7 @@ const App = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen  w-full">
+    <div className="flex flex-col justify-center items-center h-screen  w-full overflow-auto">
       <Card className="w-full max-w-3xl">
         <CardHeader>
           <CardTitle>Audio Cropper</CardTitle>
@@ -94,9 +95,19 @@ const App = () => {
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          <AudioUploader file={audioFile} onFileSelect={handleAudioUpload} />
+          <AudioUploader
+            file={audioFile}
+            disabled={!loaded}
+            onFileSelect={handleAudioUpload}
+          />
 
-          {!loaded && <div className="">Loading FFmpeg...</div>}
+          {!loaded && (
+            <div className="animate-pulse">
+              <Badge className="rounded-sm border-transparent bg-linear-to-r from-indigo-500 to-pink-500 bg-size-[105%] bg-center text-white">
+                Loading FFmpeg...
+              </Badge>
+            </div>
+          )}
 
           {audioUrl && (
             <>
