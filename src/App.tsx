@@ -1,9 +1,10 @@
-import { useState } from "react";
 import { gooeyToast } from "goey-toast";
+import { useState } from "react";
 
 import { useFFmpeg } from "./hooks/useFFmpeg";
 import type { OutputFormat } from "./types";
 
+import { Badge } from "@/components/ui/badge";
 import {
   Card,
   CardContent,
@@ -15,8 +16,8 @@ import {
 import AudioUploader from "./components/AudioUploader";
 import CropControls from "./components/CropControls";
 import DownloadButton from "./components/DownloadButton";
+import ThemeToggle from "./components/ThemeToggle";
 import WaveformEditor from "./components/WaveformEditor";
-import { Badge } from "@/components/ui/badge";
 
 const App = () => {
   const [audioFile, setAudioFile] = useState<File>();
@@ -89,7 +90,10 @@ const App = () => {
     <div className="flex h-screen w-full flex-col items-center justify-center overflow-auto">
       <Card className="w-full max-w-3xl">
         <CardHeader>
-          <CardTitle>Audio Cropper</CardTitle>
+          <div className="flex items-center justify-between">
+            <CardTitle>Audio Cropper</CardTitle>
+            <ThemeToggle />
+          </div>
           <CardDescription>
             Upload audio, select a region, crop it locally in your browser, and
             download the result.
