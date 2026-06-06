@@ -3,6 +3,7 @@ import WaveSurfer from "wavesurfer.js";
 import RegionsPlugin, {
   type Region,
 } from "wavesurfer.js/dist/plugins/regions.esm.js";
+import { PlayIcon, PauseIcon } from "lucide-react";
 
 import { formatTime } from "@/helpers";
 
@@ -11,11 +12,16 @@ import { ButtonGroup } from "./ui/button-group";
 
 export interface IWaveformEditorProps {
   audioUrl: string;
+  disabled?: boolean;
 
   onRegionChange: (start: number, end: number) => void;
 }
 
-const WaveformEditor = ({ audioUrl, onRegionChange }: IWaveformEditorProps) => {
+const WaveformEditor = ({
+  audioUrl,
+  disabled,
+  onRegionChange,
+}: IWaveformEditorProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const waveSurferRef = useRef<WaveSurfer | null>(null);
@@ -121,10 +127,12 @@ const WaveformEditor = ({ audioUrl, onRegionChange }: IWaveformEditorProps) => {
       <div ref={containerRef} />
 
       <ButtonGroup className="w-full">
-        <Button onClick={playPause} className="flex-1">
+        <Button onClick={playPause} className="flex-1" disabled={disabled}>
+          {isPlaying ? <PauseIcon /> : <PlayIcon />}
           {isPlaying ? "Pause" : "Play"}
         </Button>
-        <Button onClick={playSelection} className="flex-1">
+        <Button onClick={playSelection} className="flex-1" disabled={disabled}>
+          <PlayIcon />
           Play Selection
         </Button>
       </ButtonGroup>

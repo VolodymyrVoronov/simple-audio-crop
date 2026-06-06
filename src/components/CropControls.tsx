@@ -49,7 +49,11 @@ const CropControls = ({
             Output Format
           </Label>
 
-          <Select value={outputFormat} onValueChange={handleFormatChange}>
+          <Select
+            value={outputFormat}
+            onValueChange={handleFormatChange}
+            disabled={isCropping}
+          >
             <SelectTrigger id="format">
               <SelectValue />
             </SelectTrigger>

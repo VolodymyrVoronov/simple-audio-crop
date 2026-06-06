@@ -26,6 +26,7 @@ const App = () => {
   const [outputFormat, setOutputFormat] = useState<OutputFormat>("mp3");
   const [downloadUrl, setDownloadUrl] = useState<string | null>(null);
   const [downloadFileName, setDownloadFileName] = useState<string>("");
+  const [downloadFileSize, setDownloadFileSize] = useState<number>(0);
 
   const { loaded, isCropping, cropAudio } = useFFmpeg();
 
@@ -79,6 +80,7 @@ const App = () => {
 
       setDownloadUrl(result.downloadUrl);
       setDownloadFileName(result.fileName);
+      setDownloadFileSize(result.blob.size);
     } catch (error) {
       gooeyToast.error("Failed to crop audio.");
       console.error(error);
@@ -100,7 +102,7 @@ const App = () => {
         <CardContent className="flex flex-col gap-4">
           <AudioUploader
             file={audioFile}
-            disabled={!loaded}
+            disabled={!loaded || isCropping}
             onFileSelect={handleAudioUpload}
           />
 
@@ -116,6 +118,7 @@ const App = () => {
             <>
               <WaveformEditor
                 audioUrl={audioUrl}
+                disabled={isCropping}
                 onRegionChange={handleRegionChange}
               />
 
@@ -136,7 +139,8 @@ const App = () => {
             <DownloadButton
               downloadUrl={downloadUrl}
               fileName={downloadFileName || `cropped.${outputFormat}`}
-              fileSize={audioFile?.size}
+              fileSize={downloadFileSize}
+              disabled={isCropping}
             />
           </CardFooter>
         )}
