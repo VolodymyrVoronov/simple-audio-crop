@@ -29,7 +29,7 @@ const DownloadButton = ({
   };
 
   return (
-    <div className="flex flex-col gap-1 w-full">
+    <div className="flex w-full flex-col gap-1">
       <h3>Crop Complete</h3>
 
       <p className="font-semibold">{fileName}</p>

@@ -123,7 +123,7 @@ const WaveformEditor = ({
   };
 
   return (
-    <div className="w-full flex flex-col gap-4">
+    <div className="flex w-full flex-col gap-4">
       <div ref={containerRef} />
 
       <ButtonGroup className="w-full">
@@ -137,7 +137,7 @@ const WaveformEditor = ({
         </Button>
       </ButtonGroup>
 
-      <div className="grid gap-2 grid-cols-2 items-center lg:grid-cols-4">
+      <div className="grid grid-cols-2 items-center gap-2 lg:grid-cols-4">
         <div>
           <strong>Total Duration:</strong> {formatTime(duration)}
         </div>

@@ -56,13 +56,11 @@ const App = () => {
   const handleCrop = async () => {
     if (!audioFile) {
       gooeyToast.error("Please upload an audio file.");
-      alert("Please upload an audio file.");
       return;
     }
 
     if (!loaded) {
       gooeyToast.error("FFmpeg is still loading. Please wait a few seconds.");
-      alert("FFmpeg is still loading. Please wait a few seconds.");
       return;
     }
 
@@ -84,12 +82,11 @@ const App = () => {
     } catch (error) {
       gooeyToast.error("Failed to crop audio.");
       console.error(error);
-      alert("Failed to crop audio. Check the browser console for details.");
     }
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen  w-full overflow-auto">
+    <div className="flex h-screen w-full flex-col items-center justify-center overflow-auto">
       <Card className="w-full max-w-3xl">
         <CardHeader>
           <CardTitle>Audio Cropper</CardTitle>
@@ -150,4 +147,3 @@ const App = () => {
 };
 
 export default App;
-
