@@ -33,6 +33,7 @@ const AudioUploader = ({
         console.error(error);
       }}
       disabled={disabled}
+      multiple={false}
     >
       <DropzoneEmptyState />
       <DropzoneContent />
