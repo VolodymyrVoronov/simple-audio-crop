@@ -21,7 +21,7 @@ export const useFFmpeg = () => {
       try {
         await ffmpeg.load();
         setLoaded(true);
-        gooeyToast.success("FFmpeg loaded");
+        gooeyToast.success("FFmpeg loaded successfully");
       } catch (error) {
         gooeyToast.error("Failed to load FFmpeg");
         console.error("Failed to load FFmpeg:", error);
