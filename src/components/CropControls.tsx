@@ -46,7 +46,7 @@ const CropControls = ({
       <div className="grid grid-cols-2 items-center gap-2 lg:grid-cols-4">
         <div className="flex items-center gap-2">
           <Label htmlFor="format" className="font-semibold">
-            Output Format
+            Output Format:
           </Label>
 
           <Select
@@ -54,9 +54,13 @@ const CropControls = ({
             onValueChange={handleFormatChange}
             disabled={isCropping}
           >
-            <SelectTrigger id="format">
+            <SelectTrigger
+              id="format"
+              className="font-semibold text-violet-500 dark:text-violet-400"
+            >
               <SelectValue />
             </SelectTrigger>
+
             <SelectContent>
               <SelectGroup>
                 <SelectItem value="mp3">MP3</SelectItem>

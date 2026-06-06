@@ -1,4 +1,5 @@
 import { gooeyToast } from "goey-toast";
+import { CassetteTapeIcon } from "lucide-react";
 import { useState } from "react";
 
 import { useFFmpeg } from "./hooks/useFFmpeg";
@@ -88,10 +89,12 @@ const App = () => {
 
   return (
     <div className="flex h-full w-full flex-col items-center justify-center overflow-auto p-2 lg:p-4 xl:p-10">
-      <Card className="w-full max-w-3xl">
+      <Card className="w-full max-w-4xl">
         <CardHeader>
           <div className="flex items-center justify-between">
-            <CardTitle>Audio Cropper</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <CassetteTapeIcon size={20} /> Audio Cropper
+            </CardTitle>
             <ThemeToggle />
           </div>
           <CardDescription>
