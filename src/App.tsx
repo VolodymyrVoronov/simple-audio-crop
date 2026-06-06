@@ -3,13 +3,21 @@ import { useState } from "react";
 import { useFFmpeg } from "./hooks/useFFmpeg";
 import type { OutputFormat } from "./types";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import AudioUploader from "./components/AudioUploader";
 import CropControls from "./components/CropControls";
 import DownloadButton from "./components/DownloadButton";
 import WaveformEditor from "./components/WaveformEditor";
 
 const App = () => {
-  const [audioFile, setAudioFile] = useState<File[] | null>(null);
+  const [audioFile, setAudioFile] = useState<File>();
   const [audioUrl, setAudioUrl] = useState<string>("");
   const [cropStart, setCropStart] = useState<number>(0);
   const [cropEnd, setCropEnd] = useState<number>(0);
@@ -33,7 +41,7 @@ const App = () => {
       setDownloadUrl(null);
     }
 
-    setAudioFile([file]);
+    setAudioFile(file);
     setAudioUrl(newAudioUrl);
   };
 
@@ -55,7 +63,7 @@ const App = () => {
 
     try {
       const result = await cropAudio(
-        audioFile[0],
+        audioFile,
         cropStart,
         cropEnd,
         outputFormat,
@@ -75,40 +83,49 @@ const App = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen space-y-4 w-full">
-      <h1 className="">Audio Cropper</h1>
+    <div className="flex flex-col justify-center items-center h-screen  w-full">
+      <Card className="w-full max-w-3xl">
+        <CardHeader>
+          <CardTitle>Audio Cropper</CardTitle>
+          <CardDescription>
+            Upload audio, select a region, crop it locally in your browser, and
+            download the result.
+          </CardDescription>
+        </CardHeader>
 
-      <p className="">
-        Upload audio, select a region, crop it locally in your browser, and
-        download the result.
-      </p>
+        <CardContent className="flex flex-col gap-4">
+          <AudioUploader file={audioFile} onFileSelect={handleAudioUpload} />
 
-      <AudioUploader onFileSelect={handleAudioUpload} />
+          {!loaded && <div className="">Loading FFmpeg...</div>}
 
-      {!loaded && <div className="">Loading FFmpeg...</div>}
+          {audioUrl && (
+            <>
+              <WaveformEditor
+                audioUrl={audioUrl}
+                onRegionChange={handleRegionChange}
+              />
 
-      {audioUrl && (
-        <>
-          <WaveformEditor
-            audioUrl={audioUrl}
-            onRegionChange={handleRegionChange}
-          />
+              <CropControls
+                startTime={cropStart}
+                endTime={cropEnd}
+                isCropping={isCropping}
+                outputFormat={outputFormat}
+                onFormatChange={setOutputFormat}
+                onCrop={handleCrop}
+              />
+            </>
+          )}
+        </CardContent>
 
-          <CropControls
-            startTime={cropStart}
-            endTime={cropEnd}
-            isCropping={isCropping}
-            outputFormat={outputFormat}
-            onFormatChange={setOutputFormat}
-            onCrop={handleCrop}
-          />
-
-          <DownloadButton
-            downloadUrl={downloadUrl}
-            fileName={downloadFileName || `cropped.${outputFormat}`}
-          />
-        </>
-      )}
+        {audioUrl && downloadUrl && (
+          <CardFooter>
+            <DownloadButton
+              downloadUrl={downloadUrl}
+              fileName={downloadFileName || `cropped.${outputFormat}`}
+            />
+          </CardFooter>
+        )}
+      </Card>
     </div>
   );
 };

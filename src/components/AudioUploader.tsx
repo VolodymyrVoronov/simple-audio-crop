@@ -5,12 +5,15 @@ import {
 } from "@/components/kibo-ui/dropzone";
 
 export interface IAudioUploaderProps {
+  file?: File;
+
   onFileSelect: (file: File) => void;
 }
 
-const AudioUploader = ({ onFileSelect }: IAudioUploaderProps) => {
+const AudioUploader = ({ file, onFileSelect }: IAudioUploaderProps) => {
   return (
     <Dropzone
+      src={file ? [file] : []}
       accept={{ "audio/*": [] }}
       maxFiles={1}
       maxSize={1024 * 1024 * 20}

@@ -38,10 +38,28 @@ const CropControls = ({
   };
 
   return (
-    <div className="">
+    <div className="flex flex-col gap-2">
       <h3>Crop Settings</h3>
 
-      <div className="">
+      <div className="grid gap-2 grid-cols-2 lg:grid-cols-4 items-center">
+        <div className="flex gap-2">
+          <Label htmlFor="format">Output Format</Label>
+
+          <Select value={outputFormat} onValueChange={handleFormatChange}>
+            <SelectTrigger id="format">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectItem value="mp3">MP3</SelectItem>
+                <SelectItem value="wav">WAV</SelectItem>
+                <SelectItem value="ogg">OGG</SelectItem>
+                <SelectItem value="flac">FLAC</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </div>
+
         <div>
           <strong>Start:</strong> {formatTime(startTime)}
         </div>
@@ -53,24 +71,6 @@ const CropControls = ({
         <div>
           <strong>Length:</strong> {formatTime(selectedLength)}
         </div>
-      </div>
-
-      <div className="">
-        <Label htmlFor="format">Output Format</Label>
-
-        <Select value={outputFormat} onValueChange={handleFormatChange}>
-          <SelectTrigger id="format">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectItem value="mp3">MP3</SelectItem>
-              <SelectItem value="wav">WAV</SelectItem>
-              <SelectItem value="ogg">OGG</SelectItem>
-              <SelectItem value="flac">FLAC</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
       </div>
 
       <Button onClick={onCrop} disabled={isCropping || selectedLength <= 0}>

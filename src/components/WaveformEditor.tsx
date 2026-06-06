@@ -7,6 +7,7 @@ import RegionsPlugin, {
 import { formatTime } from "@/helpers";
 
 import { Button } from "@/components/ui/button";
+import { ButtonGroup } from "./ui/button-group";
 
 export interface IWaveformEditorProps {
   audioUrl: string;
@@ -116,16 +117,19 @@ const WaveformEditor = ({ audioUrl, onRegionChange }: IWaveformEditorProps) => {
   };
 
   return (
-    <div className="w-full flex flex-col ">
+    <div className="w-full flex flex-col gap-4">
       <div ref={containerRef} />
 
-      <div className="flex gap-3 mt-4">
-        <Button onClick={playPause}>{isPlaying ? "Pause" : "Play"}</Button>
+      <ButtonGroup className="w-full">
+        <Button onClick={playPause} className="flex-1">
+          {isPlaying ? "Pause" : "Play"}
+        </Button>
+        <Button onClick={playSelection} className="flex-1">
+          Play Selection
+        </Button>
+      </ButtonGroup>
 
-        <Button onClick={playSelection}>Play Selection</Button>
-      </div>
-
-      <div className="mt-4 grid gap-2">
+      <div className="grid gap-2 grid-cols-2 items-center lg:grid-cols-4">
         <div>
           <strong>Total Duration:</strong> {formatTime(duration)}
         </div>
