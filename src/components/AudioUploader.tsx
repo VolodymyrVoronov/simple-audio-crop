@@ -20,10 +20,10 @@ const AudioUploader = ({
 }: IAudioUploaderProps) => {
   return (
     <Dropzone
-      src={file ? [file] : []}
+      src={file ? [file] : undefined}
       accept={{ "audio/*": [] }}
       maxFiles={1}
-      maxSize={1024 * 1024 * 20}
+      maxSize={1024 * 1024 * 50}
       minSize={1024}
       onDrop={(files) => onFileSelect(files[0])}
       onError={(error) => {
