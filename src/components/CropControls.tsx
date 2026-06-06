@@ -86,6 +86,7 @@ const CropControls = ({
         disabled={isCropping || selectedLength <= 0}
         variant="outline"
         className="border-primary dark:border-primary border-dashed shadow-none"
+        size="lg"
       >
         <ScissorsLineDashedIcon />
         {isCropping ? "Cropping..." : "Crop Audio"}

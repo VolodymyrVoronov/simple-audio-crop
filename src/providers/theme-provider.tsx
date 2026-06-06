@@ -24,7 +24,7 @@ export const ThemeProviderContext =
 export function ThemeProvider({
   children,
   defaultTheme = "system",
-  storageKey = "db-stations-theme",
+  storageKey = "simple-audio-crop-theme",
   ...props
 }: ThemeProviderProps) {
   const [theme, setTheme] = useState<Theme>(

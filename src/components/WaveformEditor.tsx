@@ -127,11 +127,21 @@ const WaveformEditor = ({
       <div ref={containerRef} />
 
       <ButtonGroup className="w-full">
-        <Button onClick={playPause} className="flex-1" disabled={disabled}>
+        <Button
+          onClick={playPause}
+          className="flex-1"
+          disabled={disabled}
+          size="lg"
+        >
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
           {isPlaying ? "Pause" : "Play"}
         </Button>
-        <Button onClick={playSelection} className="flex-1" disabled={disabled}>
+        <Button
+          onClick={playSelection}
+          className="flex-1"
+          disabled={disabled}
+          size="lg"
+        >
           <PlayIcon />
           Play Selection
         </Button>
