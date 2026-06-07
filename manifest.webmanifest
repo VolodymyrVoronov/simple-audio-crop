@@ -1,0 +1,1 @@
+{"name":"Simple Audio Crop","short_name":"Simple Audio Crop","description":"Crop audio files with a simple UI","start_url":"./","display":"standalone","background_color":"#000000","theme_color":"#000000","lang":"en","scope":"./","icons":[{"src":"./pwa-icon.png","sizes":"24x24","type":"image/png"}]}
