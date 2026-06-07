@@ -1,9 +1,15 @@
+import {
+  ArrowLeft,
+  ArrowRight,
+  PauseIcon,
+  PlayIcon,
+  Scissors,
+} from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import WaveSurfer from "wavesurfer.js";
 import RegionsPlugin, {
   type Region,
 } from "wavesurfer.js/dist/plugins/regions.esm.js";
-import { PlayIcon, PauseIcon } from "lucide-react";
 
 import { formatTime } from "@/helpers";
 
@@ -147,21 +153,58 @@ const WaveformEditor = ({
         </Button>
       </ButtonGroup>
 
-      <div className="grid grid-cols-2 items-center gap-2 lg:grid-cols-4">
-        <div>
-          <strong>Total Duration:</strong> {formatTime(duration)}
-        </div>
+      <div className="space-y-3">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-800">
+            <div className="text-xs font-semibold text-gray-600 dark:text-gray-400">
+              Total Duration
+            </div>
+            <div className="text-lg font-bold text-gray-900 dark:text-white">
+              {formatTime(duration)}
+            </div>
+          </div>
 
-        <div>
-          <strong>Start:</strong> {formatTime(startTime)}
-        </div>
+          <div className="rounded-lg bg-green-50 p-3 ring-2 ring-green-200 dark:bg-green-950 dark:ring-green-800">
+            <div className="flex items-center gap-2">
+              <ArrowRight className="h-5 w-5 text-green-600 dark:text-green-400" />
+              <div>
+                <div className="text-xs font-semibold text-green-700 dark:text-green-300">
+                  Start
+                </div>
+                <div className="text-lg font-bold text-green-900 dark:text-green-100">
+                  {formatTime(startTime)}
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div>
-          <strong>End:</strong> {formatTime(endTime)}
-        </div>
+          <div className="rounded-lg bg-red-50 p-3 ring-2 ring-red-200 dark:bg-red-950 dark:ring-red-800">
+            <div className="flex items-center gap-2">
+              <ArrowLeft className="h-5 w-5 text-red-600 dark:text-red-400" />
+              <div>
+                <div className="text-xs font-semibold text-red-700 dark:text-red-300">
+                  End
+                </div>
+                <div className="text-lg font-bold text-red-900 dark:text-red-100">
+                  {formatTime(endTime)}
+                </div>
+              </div>
+            </div>
+          </div>
 
-        <div>
-          <strong>Selected:</strong> {formatTime(endTime - startTime)}
+          <div className="rounded-lg bg-blue-50 p-3 ring-2 ring-blue-200 dark:bg-blue-950 dark:ring-blue-800">
+            <div className="flex items-center gap-2">
+              <Scissors className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+              <div>
+                <div className="text-xs font-semibold text-blue-700 dark:text-blue-300">
+                  Selected
+                </div>
+                <div className="text-lg font-bold text-blue-900 dark:text-blue-100">
+                  {formatTime(endTime - startTime)}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
