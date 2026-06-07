@@ -6,6 +6,7 @@ import { defineConfig } from "vite";
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: process.env.NODE_ENV === "development" ? "/" : "/simple-audio-crop/",
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] }),
@@ -17,4 +18,3 @@ export default defineConfig({
     },
   },
 });
-
