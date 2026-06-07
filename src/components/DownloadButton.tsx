@@ -1,4 +1,4 @@
-import { DownloadIcon } from "lucide-react";
+import { CheckIcon, DownloadIcon } from "lucide-react";
 
 import { formatSize } from "@/helpers";
 
@@ -30,7 +30,9 @@ const DownloadButton = ({
 
   return (
     <div className="flex w-full flex-col gap-1">
-      <h3>Crop Complete</h3>
+      <h3 className="flex items-center gap-1">
+        Crop Complete <CheckIcon className="size-4 text-green-600" />
+      </h3>
 
       <p className="font-semibold">{fileName}</p>
 
