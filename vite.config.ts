@@ -32,12 +32,12 @@ export default defineConfig({
             type: "image/png",
           },
           {
-            src: "android-icon-512x512.png",
+            src: "pwa-icon.png",
             sizes: "512x512",
             type: "image/png",
           },
           {
-            src: "android-icon-512x512.png",
+            src: "pwa-icon.png",
             sizes: "512x512",
             type: "image/png",
             purpose: "maskable",
