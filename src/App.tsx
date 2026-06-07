@@ -1,6 +1,6 @@
 import { gooeyToast } from "goey-toast";
 import { CassetteTapeIcon } from "lucide-react";
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 
 import { useFFmpeg } from "./hooks/useFFmpeg";
 import type { OutputFormat } from "./types";
@@ -14,11 +14,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import AudioUploader from "./components/AudioUploader";
-import CropControls from "./components/CropControls";
-import DownloadButton from "./components/DownloadButton";
 import ThemeToggle from "./components/ThemeToggle";
-import WaveformEditor from "./components/WaveformEditor";
+import { Spinner } from "./components/ui/spinner";
+
+const AudioUploader = lazy(() => import("./components/AudioUploader"));
+const CropControls = lazy(() => import("./components/CropControls"));
+const DownloadButton = lazy(() => import("./components/DownloadButton"));
+const WaveformEditor = lazy(() => import("./components/WaveformEditor"));
 
 const App = () => {
   const [audioFile, setAudioFile] = useState<File>();
@@ -104,11 +106,19 @@ const App = () => {
         </CardHeader>
 
         <CardContent className="flex flex-col gap-4">
-          <AudioUploader
-            file={audioFile}
-            disabled={!loaded || isCropping}
-            onFileSelect={handleAudioUpload}
-          />
+          <Suspense
+            fallback={
+              <div className="flex w-full items-center justify-center">
+                <Spinner />
+              </div>
+            }
+          >
+            <AudioUploader
+              file={audioFile}
+              disabled={!loaded || isCropping}
+              onFileSelect={handleAudioUpload}
+            />
+          </Suspense>
 
           {!loaded && (
             <div className="animate-pulse">
@@ -119,7 +129,13 @@ const App = () => {
           )}
 
           {audioUrl && (
-            <>
+            <Suspense
+              fallback={
+                <div className="flex w-full items-center justify-center">
+                  <Spinner />
+                </div>
+              }
+            >
               <WaveformEditor
                 audioUrl={audioUrl}
                 disabled={isCropping}
@@ -134,18 +150,26 @@ const App = () => {
                 onFormatChange={setOutputFormat}
                 onCrop={handleCrop}
               />
-            </>
+            </Suspense>
           )}
         </CardContent>
 
         {audioUrl && downloadUrl && (
           <CardFooter>
-            <DownloadButton
-              downloadUrl={downloadUrl}
-              fileName={downloadFileName || `cropped.${outputFormat}`}
-              fileSize={downloadFileSize}
-              disabled={isCropping}
-            />
+            <Suspense
+              fallback={
+                <div className="flex w-full items-center justify-center">
+                  <Spinner />
+                </div>
+              }
+            >
+              <DownloadButton
+                downloadUrl={downloadUrl}
+                fileName={downloadFileName || `cropped.${outputFormat}`}
+                fileSize={downloadFileSize}
+                disabled={isCropping}
+              />
+            </Suspense>
           </CardFooter>
         )}
       </Card>
