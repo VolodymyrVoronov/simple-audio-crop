@@ -1,18 +1,10 @@
 import { ScissorsLineDashedIcon } from "lucide-react";
 
-import { formatTime } from "@/helpers";
 import type { OutputFormat } from "@/types";
 
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 
 export interface ICropControlsProps {
   startTime: number;
@@ -43,45 +35,55 @@ const CropControls = ({
     <div className="flex flex-col gap-2">
       <h3>Crop Settings</h3>
 
-      <div className="grid grid-cols-2 items-center gap-2 lg:grid-cols-4">
-        <div className="flex items-center gap-2">
-          <Label htmlFor="format" className="font-semibold">
+      <div className="flex flex-col gap-2">
+        <div className="grid grid-cols-[auto_1fr] gap-2">
+          <Label htmlFor="format" className="w-auto font-semibold">
             Output Format:
           </Label>
 
-          <Select
+          <ToggleGroup
+            id="format"
+            type="single"
             value={outputFormat}
             onValueChange={handleFormatChange}
-            disabled={isCropping}
+            aria-label="Output format"
+            spacing={0}
+            variant="outline"
+            size="lg"
+            className="w-full"
           >
-            <SelectTrigger
-              id="format"
-              className="font-semibold text-violet-500 dark:text-violet-400"
+            <ToggleGroupItem
+              value="mp3"
+              disabled={isCropping}
+              className="flex-1"
             >
-              <SelectValue />
-            </SelectTrigger>
+              MP3
+            </ToggleGroupItem>
 
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="mp3">MP3</SelectItem>
-                <SelectItem value="wav">WAV</SelectItem>
-                <SelectItem value="ogg">OGG</SelectItem>
-                <SelectItem value="flac">FLAC</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
-        </div>
+            <ToggleGroupItem
+              value="wav"
+              disabled={isCropping}
+              className="flex-1"
+            >
+              WAV
+            </ToggleGroupItem>
 
-        <div>
-          <strong>Start:</strong> {formatTime(startTime)}
-        </div>
+            <ToggleGroupItem
+              value="ogg"
+              disabled={isCropping}
+              className="flex-1"
+            >
+              OGG
+            </ToggleGroupItem>
 
-        <div>
-          <strong>End:</strong> {formatTime(endTime)}
-        </div>
-
-        <div>
-          <strong>Length:</strong> {formatTime(selectedLength)}
+            <ToggleGroupItem
+              value="flac"
+              disabled={isCropping}
+              className="flex-1"
+            >
+              FLAC
+            </ToggleGroupItem>
+          </ToggleGroup>
         </div>
       </div>
 
