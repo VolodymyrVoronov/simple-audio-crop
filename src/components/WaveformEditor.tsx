@@ -43,6 +43,8 @@ const WaveformEditor = ({
       return;
     }
 
+    setIsPlaying(false);
+
     const regions = RegionsPlugin.create();
 
     const ws = WaveSurfer.create({
