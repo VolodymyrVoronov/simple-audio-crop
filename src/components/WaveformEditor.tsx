@@ -156,8 +156,8 @@ const WaveformEditor = ({
       </ButtonGroup>
 
       <div className="space-y-3">
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="rounded-lg bg-gray-100 p-3 dark:bg-gray-800">
+        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+          <div className="rounded-lg bg-gray-100 p-2 md:p-3 dark:bg-gray-800">
             <div className="text-xs font-semibold text-gray-600 dark:text-gray-400">
               Total Duration
             </div>
@@ -166,7 +166,7 @@ const WaveformEditor = ({
             </div>
           </div>
 
-          <div className="rounded-lg bg-green-50 p-3 ring-2 ring-green-200 dark:bg-green-950 dark:ring-green-800">
+          <div className="rounded-lg bg-green-50 p-2 ring-2 ring-green-200 md:p-3 dark:bg-green-950 dark:ring-green-800">
             <div className="flex items-center gap-2">
               <ArrowRight className="h-5 w-5 text-green-600 dark:text-green-400" />
               <div>
@@ -180,7 +180,7 @@ const WaveformEditor = ({
             </div>
           </div>
 
-          <div className="rounded-lg bg-red-50 p-3 ring-2 ring-red-200 dark:bg-red-950 dark:ring-red-800">
+          <div className="rounded-lg bg-red-50 p-2 ring-2 ring-red-200 md:p-3 dark:bg-red-950 dark:ring-red-800">
             <div className="flex items-center gap-2">
               <ArrowLeft className="h-5 w-5 text-red-600 dark:text-red-400" />
               <div>
@@ -194,7 +194,7 @@ const WaveformEditor = ({
             </div>
           </div>
 
-          <div className="rounded-lg bg-blue-50 p-3 ring-2 ring-blue-200 dark:bg-blue-950 dark:ring-blue-800">
+          <div className="rounded-lg bg-blue-50 p-2 ring-2 ring-blue-200 md:p-3 dark:bg-blue-950 dark:ring-blue-800">
             <div className="flex items-center gap-2">
               <Scissors className="h-5 w-5 text-blue-600 dark:text-blue-400" />
               <div>
